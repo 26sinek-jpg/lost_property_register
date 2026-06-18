@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lost Property Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Lost Property Register</h1>
+        <p>Use this form to record a lost property item found at school.</p>
+        <form action="/add" method="POST">
+            <label>Item Name:</label>
+            <input type="text" name="item_name" required>
+            <label>Location Found:</label>
+            <input type="text" name="location_found" required>
+            <label>Date Found:</label>
+            <input type="date" name="date_found" required>
+            <label>Description:</label>
+            <textarea name="description" required></textarea>
+            <button type="submit">Add Item</button>
+        </form>
+        <a href="/items">View Lost Property Items</a>
+    </div>
+</body></html>
