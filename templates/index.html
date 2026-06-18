@@ -17,6 +17,13 @@
             <input type="date" name="date_found" required>
             <label>Description:</label>
             <textarea name="description" required></textarea>
+            <label>Item name:</label>
+            <select name="category" required>
+                <option value="clothing">Clothing</option>
+                <option value="stationary">stationary</option>
+                <option value="electronics">electronics</option>
+            </select>
+
             <button type="submit">Add Item</button>
         </form>
         <a href="/items">View Lost Property Items</a>
