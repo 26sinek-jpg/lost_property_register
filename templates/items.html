@@ -15,6 +15,8 @@
                     <th>Location Found</th>
                     <th>Date Found</th>
                     <th>Description</th>
+                    <th>Item type</th>
+                    <th>Claimed status</th>
                 </tr>
                 {% for item in items %}
                 <tr>
@@ -23,6 +25,15 @@
                     <td>{{ item[2] }}</td>
                     <td>{{ item[3] }}</td>
                     <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                    <td>
+                        {% if item[6] == 1 %}
+                            Claimed
+                        {% else %}
+                            <a href="/claim/{{ item[0]}}">Mark as claimed</a>
+                        {% endif %}
+                    </td>
+
                 </tr>
                 {% endfor %}
             </table>

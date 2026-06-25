@@ -13,7 +13,8 @@ def create_database():
             location_found TEXT NOT NULL,
             date_found TEXT NOT NULL,
             description TEXT NOT NULL,
-            category TEXT NOT NULL
+            category TEXT NOT NULL,
+            claimed INTEGER DEFAULT 0
         )
     """)
     connection.commit()
@@ -36,8 +37,8 @@ def add_item():
     cursor = connection.cursor()
  
     cursor.execute("""
-        INSERT INTO items (item_name, location_found, date_found, description,category)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO items (item_name, location_found, date_found, description,category, claimed)
+        VALUES (?, ?, ?, ?, ? , 0)
     """, (item_name, location_found, date_found, description,category))
  
     connection.commit()
@@ -53,7 +54,14 @@ def view_items():
     connection.close()
     return render_template("items.html", items=items)
  
- 
+@app.route("/claim/<int:item_id>")
+def claim_item(item_id):
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+    cursor.execute("UPDATE items SET claimed = 1 WHERE id =?",(item_id,))
+    connection.commit()
+    connection.close()
+    return redirect("/items")
 if __name__ == "__main__":
     create_database()
     app.run(debug=True)
